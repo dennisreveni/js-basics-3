@@ -1,12 +1,21 @@
 function range(start, end, step) {
-	step = step ? step : 1;
-	if ((end-start)*step > 0) {
-    	var rangeArr = [];
+  start = parseInt(start) ? parseInt(start) : 1;
+  end = parseInt(end) ? parseInt(end) : 99;
+	step = parseInt(step) ? parseInt(start) : 1;
+  step=(step<0)?step*(-1):step;
+  
+  var rangeArr = [];  
+  if (start<end){
     	for (i=start; i<=end; i+=step){
         	rangeArr.push(i);
     	}
     	return rangeArr;  
-	}else {return false;}                
+  }else{
+    	for (i=end; i<=start; i+=step){
+        	rangeArr.push(i);
+    	}
+    	return rangeArr;
+  }            
 }
 
 function sum(numbers) {
@@ -46,14 +55,12 @@ function arrayToList(arr) {
 	return list;
 }
 
- function listToArray(list) {
-	var newArr = [];
-	function toArr(list) {
-		newArr.push(list.value);
-		return (list.rest) ? toArr(list.rest) : newArr
+function arrayToList(arr) {
+	var list = null;
+	for (i=arr.length-1; i>=0; i--) {
+		list = prepend(arr[i], list);
 	}
-	toArr(list);
-	return newArr;
+	return list;
 }
 
 function prepend(item, list) {
@@ -70,36 +77,25 @@ function nth(n, list) {
 	}
 }
 
-/*var list = {
-	value: 1,
-	rest: {
-		value: 2,
-		rest: {
-			value: 3,
-			rest: {
-				value: 4,
-				rest: null
-			}
-		}
-	}
-}
-
 console.log(nth(3, list))*/
 
 function deepEqual(a, b) {
-	if (a !== null && b !== null && typeof a === 'object' && typeof b === 'object') {
-		if (Object.getOwnPropertyNames(a).length !== Object.getOwnPropertyNames(a).length) {
-			return false;
-		}
-
-		for (i = 0; i < Object.getOwnPropertyNames(a).length; i++) {
-			if (!b.hasOwnProperty(Object.getOwnPropertyNames[i])) {
-				return false;
-			} else if (!deepEqual(a[Object.getOwnPropertyNames(a)[i]], b[Object.getOwnPropertyNames(a)[i]])) {
-				return false;
-			}
-		}
-		return true;
+	if (a !== null && b !== null && typeof(a) === 'object' && typeof(b) === 'object') {
+		var a_prop = Object.getOwnPropertyNames(a);
+    	var b_prop = Object.getOwnPropertyNames(b);
+    
+    	if(a_prop.length !== b_prop.length){
+      		return false;
+    	}else{
+      		for (a_prop in a){
+        		if (a_prop in b){
+          			return deepEqual(a[a_prop], b[b_prop]) ;
+        		}else{
+          			return false;
+        		}
+      		}
+    	}
+    
 	} else {
 		return a === b;
 	}
