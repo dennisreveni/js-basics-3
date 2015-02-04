@@ -5,7 +5,7 @@ function range(start, end, step) {
   step = parseInt(step) ? parseInt(step) : 1;
   if(step<0){
     if (start<end){
-      return range(end, start, -step);
+      return range(start, end, -step);
     }else{
       return range(start, end, -step);
     }
