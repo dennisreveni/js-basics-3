@@ -1,21 +1,24 @@
 function range(start, end, step) {
+  var rangeArr = [];
   start = parseInt(start) ? parseInt(start) : 1;
   end = parseInt(end) ? parseInt(end) : 99;
-	step = parseInt(step) ? parseInt(start) : 1;
-  step=(step<0)?step*(-1):step;
+  step = parseInt(step) ? parseInt(step) : 1;
   
-  var rangeArr = [];  
-  if (start<end){
+  if(step<0){
+    return range(end, start, step*(-1));
+  }else{
+    if (start<end){
     	for (i=start; i<=end; i+=step){
         	rangeArr.push(i);
     	}
-    	return rangeArr;  
-  }else{
-    	for (i=end; i<=start; i+=step){
+    	return rangeArr;   
+    }else{
+    	for (i=start; i>=end; i=i-step){
         	rangeArr.push(i);
     	}
-    	return rangeArr;
-  }            
+    	return rangeArr; 
+    }
+  }
 }
 
 function sum(numbers) {
@@ -89,7 +92,7 @@ function deepEqual(a, b) {
     	}else{
       		for (a_prop in a){
         		if (a_prop in b){
-          			return deepEqual(a[a_prop], b[b_prop]) ;
+          			return deepEqual(a[a_prop], b[a_prop]) ;
         		}else{
           			return false;
         		}
