@@ -3,20 +3,23 @@ function range(start, end, step) {
   start = parseInt(start) ? parseInt(start) : 1;
   end = parseInt(end) ? parseInt(end) : 99;
   step = parseInt(step) ? parseInt(step) : 1;
-  
   if(step<0){
-    return range(end, start, step*(-1));
+    if (start<end){
+      return range(end, start, -step);
+    }else{
+      return range(start, end, -step);
+    }
   }else{
     if (start<end){
-    	for (i=start; i<=end; i+=step){
-        	rangeArr.push(i);
-    	}
-    	return rangeArr;   
+      for (i=start; i<=end; i+=step){
+        rangeArr.push(i);
+      }
+      return rangeArr;
     }else{
-    	for (i=start; i>=end; i=i-step){
-        	rangeArr.push(i);
-    	}
-    	return rangeArr; 
+      for (i=start; i>=end; i=i-step){
+        rangeArr.push(i);
+      }
+      return rangeArr;
     }
   }
 }
