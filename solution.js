@@ -47,12 +47,14 @@ function reverseArrayInPlace(arr) {
 	return arr;
 }
 
-function arrayToList(arr) {
-	var list = null;
-	for (i=0; i<arr.length; i++) {
-		list = prepend(arr[i], list);
+function listToArray(list) {
+	var newArr = [];
+	function toArr(list) {
+		newArr.push(list.value);
+		return (list.rest) ? toArr(list.rest) : newArr
 	}
-	return list;
+	toArr(list);
+	return newArr;
 }
 
 function arrayToList(arr) {
