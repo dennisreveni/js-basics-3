@@ -77,8 +77,6 @@ function nth(n, list) {
 	}
 }
 
-console.log(nth(3, list))*/
-
 function deepEqual(a, b) {
 	if (a !== null && b !== null && typeof(a) === 'object' && typeof(b) === 'object') {
 		var a_prop = Object.getOwnPropertyNames(a);
